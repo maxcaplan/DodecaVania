@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbi3kaf1ot1q2"]
+[gd_scene load_steps=7 format=3 uid="uid://dbi3kaf1ot1q2"]
 
 [ext_resource type="Script" path="res://scripts/player/player_state_manager.gd" id="1_einbg"]
 [ext_resource type="Script" path="res://scripts/player/states/player_idle_state.gd" id="2_jvtks"]
 [ext_resource type="Script" path="res://scripts/player/states/player_walk_state.gd" id="3_8clk2"]
 [ext_resource type="Script" path="res://scripts/player/states/player_jump_state.gd" id="4_g65rv"]
+[ext_resource type="Script" path="res://scripts/player/states/player_stopping_state.gd" id="4_urnyx"]
 [ext_resource type="Script" path="res://scripts/player/states/player_fall_state.gd" id="5_m43ik"]
 
 [node name="PlayerStateMangager" type="Node"]
@@ -13,12 +14,23 @@ starting_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="."]
 script = ExtResource("2_jvtks")
 walk_node = NodePath("../Walk")
+stopping_node = NodePath("../Stopping")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
 
 [node name="Walk" type="Node" parent="."]
 script = ExtResource("3_8clk2")
 idle_node = NodePath("../Idle")
+walk_node = NodePath(".")
+stopping_node = NodePath("../Stopping")
+jump_node = NodePath("../Jump")
+fall_node = NodePath("../Fall")
+
+[node name="Stopping" type="Node" parent="."]
+script = ExtResource("4_urnyx")
+idle_node = NodePath("../Idle")
+walk_node = NodePath("../Walk")
+stopping_node = NodePath(".")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
 
@@ -26,10 +38,14 @@ fall_node = NodePath("../Fall")
 script = ExtResource("4_g65rv")
 idle_node = NodePath("../Idle")
 walk_node = NodePath("../Walk")
+stopping_node = NodePath("../Stopping")
+jump_node = NodePath(".")
 fall_node = NodePath("../Fall")
 
 [node name="Fall" type="Node" parent="."]
 script = ExtResource("5_m43ik")
 idle_node = NodePath("../Idle")
 walk_node = NodePath("../Walk")
+stopping_node = NodePath("../Stopping")
 jump_node = NodePath("../Jump")
+fall_node = NodePath(".")

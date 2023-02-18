@@ -1,10 +1,16 @@
 class_name Player extends CharacterBody2D
 
-@export_group("Movement")
+@export_category("Movement")
 @export var gravity : = 8
-@export var move_speed : = 60
+
 @export var jump_speed : = 100
 @export_range(0, 1) var input_dead_zone : = 0.1
+
+@export_subgroup("Walk")
+@export var walk_speed : = 60
+@export var walk_acceleration : = 20
+@export var walk_turn_acceleration : = 20
+@export var walk_friction : = 20
 
 @onready var states: StateManager = $StateManager
 
