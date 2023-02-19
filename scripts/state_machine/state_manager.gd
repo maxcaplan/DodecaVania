@@ -3,6 +3,9 @@ class_name StateManager extends Node
 
 @export_node_path("Node") var starting_state
 
+@export_placeholder("state name") var current_state_name: String: 
+	get: return current_state.name
+
 var current_state: BaseState
 
 # Transitions from the current state to a provided new state

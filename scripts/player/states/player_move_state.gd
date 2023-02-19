@@ -5,19 +5,36 @@ class_name PlayerMoveState extends BaseState
 @export_node_path var stopping_node
 @export_node_path var jump_node
 @export_node_path var fall_node
+@export_node_path var fast_fall_node
 
 @onready var idle_state: BaseState = get_node(idle_node)
 @onready var walk_state: BaseState = get_node(walk_node)
 @onready var stopping_state: BaseState = get_node(stopping_node)
 @onready var jump_state: BaseState = get_node(jump_node)
 @onready var fall_state: BaseState = get_node(fall_node)
+@onready var fast_fall_state: BaseState = get_node(fast_fall_node)
+
+var gravity: float
+var fall_speed: float
+
+func enter() -> void:
+	super()
+	gravity = parentNode.base_gravity
+	fall_speed = parentNode.fall_speed
+
+func exit() -> void:
+	super()
+	gravity = parentNode.base_gravity
+	fall_speed = parentNode.fall_speed
 
 func physics_process(delta: float) -> BaseState:
-	apply_gravity()
+	apply_gravity(gravity, fall_speed)
 	return null
 
-func apply_gravity() -> void:
-	parentNode.velocity.y += parentNode.gravity
+func apply_gravity(gravity: float, max_speed: float = -1) -> void:
+	prints("Gravity:", gravity, "Max Speed:", max_speed)
+	if(parentNode.velocity.y < max_speed or max_speed < 0):
+		parentNode.velocity.y += gravity
 
 func apply_acceleration(direction: float, delta: float) -> void:
 	var from = parentNode.velocity.x

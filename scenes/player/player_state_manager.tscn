@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbi3kaf1ot1q2"]
+[gd_scene load_steps=8 format=3 uid="uid://dbi3kaf1ot1q2"]
 
 [ext_resource type="Script" path="res://scripts/player/player_state_manager.gd" id="1_einbg"]
 [ext_resource type="Script" path="res://scripts/player/states/player_idle_state.gd" id="2_jvtks"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/states/player_jump_state.gd" id="4_g65rv"]
 [ext_resource type="Script" path="res://scripts/player/states/player_stopping_state.gd" id="4_urnyx"]
 [ext_resource type="Script" path="res://scripts/player/states/player_fall_state.gd" id="5_m43ik"]
+[ext_resource type="Script" path="res://scripts/player/states/player_fast_fall_state.gd" id="7_nxfv2"]
 
 [node name="PlayerStateMangager" type="Node"]
 script = ExtResource("1_einbg")
@@ -25,6 +26,7 @@ walk_node = NodePath(".")
 stopping_node = NodePath("../Stopping")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
+fast_fall_node = NodePath("../FastFall")
 
 [node name="Stopping" type="Node" parent="."]
 script = ExtResource("4_urnyx")
@@ -33,6 +35,7 @@ walk_node = NodePath("../Walk")
 stopping_node = NodePath(".")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
+fast_fall_node = NodePath("../FastFall")
 
 [node name="Jump" type="Node" parent="."]
 script = ExtResource("4_g65rv")
@@ -41,6 +44,7 @@ walk_node = NodePath("../Walk")
 stopping_node = NodePath("../Stopping")
 jump_node = NodePath(".")
 fall_node = NodePath("../Fall")
+fast_fall_node = NodePath("../FastFall")
 
 [node name="Fall" type="Node" parent="."]
 script = ExtResource("5_m43ik")
@@ -49,3 +53,13 @@ walk_node = NodePath("../Walk")
 stopping_node = NodePath("../Stopping")
 jump_node = NodePath("../Jump")
 fall_node = NodePath(".")
+fast_fall_node = NodePath("../FastFall")
+
+[node name="FastFall" type="Node" parent="."]
+script = ExtResource("7_nxfv2")
+idle_node = NodePath("../Idle")
+walk_node = NodePath("../Walk")
+stopping_node = NodePath("../Stopping")
+jump_node = NodePath("../Jump")
+fall_node = NodePath("../Fall")
+fast_fall_node = NodePath(".")

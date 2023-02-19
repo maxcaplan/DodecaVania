@@ -23,7 +23,7 @@ func input(event: InputEvent) -> BaseState:
 	return null
 
 func physics_process(delta: float) -> BaseState:
-	parentNode.velocity.y += parentNode.gravity
+	parentNode.velocity.y += parentNode.base_gravity
 	parentNode.move_and_slide()
 
 	if !parentNode.is_on_floor():

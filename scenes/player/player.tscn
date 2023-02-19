@@ -5,19 +5,22 @@
 [ext_resource type="PackedScene" uid="uid://dbi3kaf1ot1q2" path="res://scenes/player/player_state_manager.tscn" id="2_3decg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yegf5"]
-size = Vector2(4, 15)
+size = Vector2(4, 14)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_gijud")
-input_dead_zone = 0.01
 walk_acceleration = 10
 walk_friction = 15
+jump_force = 120
+jump_gravity = 5
+fall_speed = 200
+fast_fall_speed = 280
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gsggc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_yegf5")
 
 [node name="StateManager" parent="." instance=ExtResource("2_3decg")]

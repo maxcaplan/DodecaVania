@@ -2,8 +2,8 @@ extends PlayerMoveState
 
 func enter() -> void:
 	super()
-	gravity = parentNode.base_gravity
-	fall_speed = parentNode.fall_speed
+	gravity = parentNode.fast_fall_gravity
+	fall_speed = parentNode.fast_fall_speed
 
 func physics_process(delta: float) -> BaseState:
 	# Run move super class state and change state if needed
@@ -27,7 +27,7 @@ func physics_process(delta: float) -> BaseState:
 		
 		return idle_state
 	
-	if Input.is_action_pressed("input_down") and parentNode.velocity.y >= 0:
-		return fast_fall_state
+	if !Input.is_action_pressed("input_down"):
+		return fall_state
 	
 	return null
