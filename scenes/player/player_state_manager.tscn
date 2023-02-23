@@ -14,10 +14,12 @@ starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource("2_jvtks")
+idle_node = NodePath(".")
 walk_node = NodePath("../Walk")
 stopping_node = NodePath("../Stopping")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
+fast_fall_node = NodePath("../FastFall")
 
 [node name="Walk" type="Node" parent="."]
 script = ExtResource("3_8clk2")

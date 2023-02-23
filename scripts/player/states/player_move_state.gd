@@ -32,7 +32,6 @@ func physics_process(delta: float) -> BaseState:
 	return null
 
 func apply_gravity(gravity: float, max_speed: float = -1) -> void:
-	prints("Gravity:", gravity, "Max Speed:", max_speed)
 	if(parentNode.velocity.y < max_speed or max_speed < 0):
 		parentNode.velocity.y += gravity
 

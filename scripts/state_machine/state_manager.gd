@@ -3,7 +3,7 @@ class_name StateManager extends Node
 
 @export_node_path("Node") var starting_state
 
-@export_placeholder("state name") var current_state_name: String: 
+@export_placeholder("state name") var current_state_name:
 	get: return current_state.name
 
 var current_state: BaseState
@@ -12,7 +12,7 @@ var current_state: BaseState
 func change_state(new_state: BaseState) -> void:
 	if current_state:
 		current_state.exit()
-	
+
 	current_state = new_state
 	current_state.enter()
 
@@ -22,7 +22,7 @@ func init(parentNode: Node) -> void:
 	# to all state nodes
 	for child in get_children():
 		child.parentNode = parentNode
-		
+
 	# Set the starting state of the state machine
 	change_state(get_node(starting_state))
 
@@ -32,18 +32,18 @@ func init(parentNode: Node) -> void:
 
 func process(delta: float) -> void:
 	var new_state = current_state.process(delta)
-	
+
 	if new_state:
 		change_state(new_state)
 
 func physics_process(delta: float) -> void:
 	var new_state = current_state.physics_process(delta)
-	
+
 	if new_state:
 		change_state(new_state)
 
 func input(event: InputEvent) -> void:
 	var new_state = current_state.input(event)
-	
+
 	if new_state:
 		change_state(new_state)

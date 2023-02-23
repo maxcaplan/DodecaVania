@@ -28,7 +28,7 @@ class_name Player extends CharacterBody2D
 func _ready() -> void:
 	# Set the players initial velocity to 0
 	velocity = Vector2.ZERO
-	
+
 	# Initialize state machine with refrence to self
 	states.init(self)
 
