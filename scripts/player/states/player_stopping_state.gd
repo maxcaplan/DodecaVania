@@ -5,9 +5,7 @@ func physics_process(delta: float) -> BaseState:
 	var new_state = super(delta)
 	if new_state: return new_state
 
-	var direction = Input.get_axis("input_left", "input_right")
-
-	if abs(direction) > parentNode.input_dead_zone:
+	if abs(inputDirection) > parentNode.input_dead_zone:
 		return walk_state
 
 	apply_friction(parentNode.walk_friction)

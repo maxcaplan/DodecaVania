@@ -6,7 +6,10 @@ func input(event: InputEvent) -> BaseState:
 	var new_state = super(event)
 	if new_state: return new_state
 
-	if Input.is_action_just_pressed("input_jump"):
+	var currentTime = Time.get_ticks_msec()
+	var lastJumpInputDeltaTime = currentTime - parentNode.lastJumpInput
+
+	if lastJumpInputDeltaTime <= parentNode.jumpBufferTime:
 		return jump_state
 
 	return null

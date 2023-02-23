@@ -18,4 +18,6 @@ func physics_process(delta: float) -> BaseState:
 	if parentNode.velocity.x != 0:
 		return stopping_state
 
+	parentNode.move_and_slide()
+
 	return null

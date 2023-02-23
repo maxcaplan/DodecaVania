@@ -12,7 +12,10 @@ script = ExtResource("1_gijud")
 walk_acceleration = 10
 walk_friction = 15
 jump_force = 120
+jump_forward_force = 30
 jump_gravity = 5
+jumpBufferTime = 200
+air_friction = 5
 fall_speed = 200
 fast_fall_speed = 280
 

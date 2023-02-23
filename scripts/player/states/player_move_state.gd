@@ -17,10 +17,13 @@ class_name PlayerMoveState extends BaseState
 var gravity: float
 var fall_speed: float
 
+var inputDirection : = 0
+
 func enter() -> void:
 	super()
 	gravity = parentNode.base_gravity
 	fall_speed = parentNode.fall_speed
+	inputDirection = Input.get_axis("input_left", "input_right")
 
 func exit() -> void:
 	super()
@@ -29,6 +32,8 @@ func exit() -> void:
 
 func physics_process(delta: float) -> BaseState:
 	apply_gravity(gravity, fall_speed)
+	inputDirection = Input.get_axis("input_left", "input_right")
+
 	return null
 
 func apply_gravity(gravity: float, max_speed: float = -1) -> void:

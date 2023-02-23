@@ -1,4 +1,4 @@
-extends PlayerMoveState
+extends PlayerAirMoveState
 
 func enter() -> void:
 	super()
@@ -10,24 +10,24 @@ func physics_process(delta: float) -> BaseState:
 	var new_state = super(delta)
 	if new_state: return new_state
 
-	var direction = Input.get_axis("input_left", "input_right")
+	var currentTime = Time.get_ticks_msec()
+	var lastOnFloorDeltaTime = currentTime - parentNode.lastOnFloor
+	var lastJumpInputDeltaTime = currentTime - parentNode.lastJumpInput
 
-	if abs(direction) > parentNode.input_dead_zone:
-		apply_acceleration(direction, parentNode.air_acceleration)
+	if lastOnFloorDeltaTime <= parentNode.coyoteTime:
+		if lastJumpInputDeltaTime <= parentNode.jumpBufferTime:
+			print("coyote jump")
+			return jump_state
+
+
+	if abs(inputDirection) > parentNode.input_dead_zone:
+		apply_acceleration(inputDirection, parentNode.air_acceleration)
 	else:
 		apply_friction(parentNode.air_friction)
 
-	parentNode.move_and_slide()
-
-	if parentNode.is_on_floor():
-		if abs(direction) >= parentNode.input_dead_zone:
-			return walk_state
-		if parentNode.velocity.x > 0:
-			return stopping_state
-
-		return idle_state
-
 	if Input.is_action_pressed("input_down") and parentNode.velocity.y >= 0:
 		return fast_fall_state
+
+	parentNode.move_and_slide()
 
 	return null
