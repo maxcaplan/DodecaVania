@@ -31,6 +31,9 @@ func _ready() -> void:
 	var cameraAreaRec = camera_area.get_collision_shape_rect()
 	if cameraAreaRec.get_area() != 0: update_camera_limit(cameraAreaRec)
 
+	position = player.position
+	reset_smoothing()
+
 func _physics_process(delta: float) -> void:
 	var inputDir: Vector2
 	inputDir.x = Input.get_axis("input_left", "input_right")
