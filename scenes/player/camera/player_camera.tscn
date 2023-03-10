@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cint1avu18ywv"]
+
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="1_q0ssk"]
+
+[node name="PlayerCamera" type="Camera2D"]
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+script = ExtResource("1_q0ssk")
+offset_x = 20.0
+offset_y = 40.0
+offset_x_delta = 5.0
+offset_y_delta = 2.5
+offset_x_delay = 0.5
+offset_y_delay = 0.5
+
+[node name="XOffsetTimer" type="Timer" parent="."]
+
+[node name="YOffsetTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="XOffsetTimer" to="." method="_on_x_offset_timer_timeout"]
+[connection signal="timeout" from="YOffsetTimer" to="." method="_on_y_offset_timer_timeout"]
