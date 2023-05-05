@@ -16,7 +16,6 @@ func physics_process(delta: float) -> BaseState:
 
 	if lastOnFloorDeltaTime <= parentNode.coyoteTime:
 		if lastJumpInputDeltaTime <= parentNode.jumpBufferTime:
-			print("coyote jump")
 			return jump_state
 
 

@@ -51,8 +51,6 @@ func _physics_process(delta: float) -> void:
 
 	states.physics_process(delta)
 
-	print(velocity)
-
 func _unhandled_input(event: InputEvent) -> void:
 	# Update lastJumpInput time when jump is pressed
 	if Input.is_action_just_pressed("input_jump"):

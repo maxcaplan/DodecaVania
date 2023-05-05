@@ -1,6 +1,6 @@
-extends Camera2D
+class_name PlayerCamera extends Camera2D
 
-@export var camera_area : CameraArea2D
+@export var current_room : Room
 @export var player : Player
 
 @onready var offset_x_timer: Timer = $XOffsetTimer
@@ -26,9 +26,8 @@ var camOffset : = Vector2.ZERO
 var is_offseting_x : = false
 var is_offseting_y : = false
 
-
-func _ready() -> void:
-	var cameraAreaRec = camera_area.get_collision_shape_rect()
+func init() -> void:
+	var cameraAreaRec = current_room.player_camera_area.get_collision_shape_rect()
 	if cameraAreaRec.get_area() != 0: update_camera_limit(cameraAreaRec)
 
 	position = player.position
@@ -46,6 +45,16 @@ func _physics_process(delta: float) -> void:
 	position = player.position + camOffset
 
 func update_camera_limit(rect: Rect2):
+	var viewportRect = get_viewport_rect()
+
+	if viewportRect.size.x > rect.size.x:
+		rect.position.x = rect.get_center().x - viewportRect.size.x / 2
+		rect.size.x = viewportRect.size.x
+
+	if viewportRect.size.y > rect.size.y:
+		rect.position.y = rect.get_center().y - viewportRect.size.y / 2
+		rect.size.y = viewportRect.size.y
+
 	limit_left = rect.position.x
 	limit_right = rect.end.x
 	limit_top = rect.position.y
@@ -70,10 +79,8 @@ func update_offset_timers(inputDir: Vector2) -> void:
 
 func update_camera_offset(delta: float, inputDir: Vector2) -> void:
 	var targetOffset = calc_camera_offset(inputDir)
-	printt(targetOffset)
 	camOffset.x = lerpf(camOffset.x, targetOffset.x, offset_x_delta * delta)
 	camOffset.y = lerpf(camOffset.y, targetOffset.y, offset_y_delta * delta)
-
 
 func calc_camera_offset(inputDir: Vector2) -> Vector2:
 	var offset : Vector2

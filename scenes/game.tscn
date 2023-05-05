@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5hvm44jtka5x"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_dx8wk"]
+[ext_resource type="PackedScene" uid="uid://bpu4b3ei8jdix" path="res://scenes/player/player.tscn" id="2_3djhs"]
+[ext_resource type="PackedScene" uid="uid://cint1avu18ywv" path="res://scenes/player/camera/player_camera.tscn" id="3_kylen"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_camera")]
+script = ExtResource("1_dx8wk")
+player = NodePath("Player")
+player_camera = NodePath("PlayerCamera")
+starting_room = "res://scenes/world/rooms/room_one.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_3djhs")]
+
+[node name="PlayerCamera" parent="." node_paths=PackedStringArray("current_room", "player") instance=ExtResource("3_kylen")]
+current_room = NodePath("")
+player = NodePath("../Player")
